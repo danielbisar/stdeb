@@ -48,6 +48,11 @@ interpreter (and only the Python3 package installs scripts)::
 
 News
 ----
+
+ * 2023-09-05: **Version 0.11.1**.
+
+  * update url in setup.py
+
  * 2022-08-12: **Version 0.11.0**.
 
   * Improvements:
@@ -784,6 +789,18 @@ All available options:
 
 The option names in stdeb.cfg files are not case sensitive.
 
+Customize debian in deb (ex; postinst)
+``````````````````````````````````````
+
+It may be necessary to customize the contents in the debian folder of the deb.
+
+In this case, if you proceed as below, your own debian content will automatically be built into deb.
+
+1. Create a debian folder in the path where setup.py is located
+2. Create your own file within the debian folder
+
+ex) debian/<packagename>.postinst
+
 Reproducible builds
 -------------------
 
@@ -895,3 +912,4 @@ Additional Credits
 .. image:: https://badges.gitter.im/Join%20Chat.svg
    :alt: Join the chat at https://gitter.im/astraw/stdeb
    :target: https://gitter.im/astraw/stdeb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+
