@@ -1,5 +1,6 @@
 import os
-import shutil
+#import shutil
+import distutils
 import stdeb.util as util
 
 from distutils.core import Command
@@ -60,14 +61,20 @@ class bdist_deb(Command):
         self.check_for_and_copy_custom_debian_scripts(target_dir)
         self.generate_debian_pkg(target_dir)
 
-    def check_for_and_copy_custom_debian_scripts(self, target_dir: str):
+    def check_for_and_copy_custom_debian_scripts(self, target_dir):
         custom_debian_folder = os.path.join(os.getcwd(), 'debian')
-
+        # NOTE:
+        # if py38 or later, copytree supports dirs_exits_ok parameter.
+        # It is not necessary to use 'distutils', specify
+        # 'dirs_exists_ok=True' to copytree instead when stdeb support
+        # only py38 or later.
+        # shutil.copytree(custom_debian_folder, os.path.join(target_dir, 'debian'), dirs_exist_ok=True)
+        # !!AND!! distutils has been DEPRECATED and will be removed in Python 3.12.
         if os.path.exists(custom_debian_folder):
             print("STDEB: Found custom debian folder, copying to target directory " + target_dir)
-            shutil.copytree(custom_debian_folder, os.path.join(target_dir, 'debian'), dirs_exist_ok=True)
+            distutils.dir_util.copy_tree(custom_debian_folder, os.path.join(target_dir, 'debian'))
 
-    def generate_debian_pkg(self, target_dir: str):
+    def generate_debian_pkg(self, target_dir):
         # define system command to execute (gen .deb binary pkg)
         syscmd = ['dpkg-buildpackage', '-rfakeroot', '-b']
 
