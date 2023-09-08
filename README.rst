@@ -49,9 +49,18 @@ interpreter (and only the Python3 package installs scripts)::
 News
 ----
 
+ * 2023-09-08: **Version 0.11.2**.
+
+  * Bugfixes:
+
+    * fix part of error when running from 0.11.0 to python2
+
  * 2023-09-05: **Version 0.11.1**.
 
-  * update url in setup.py
+  * Cosmetic:
+    * update url in setup.py
+    * update README.rst for 0.11.0
+      * Customize debian in deb (ex; postinst)
 
  * 2022-08-12: **Version 0.11.0**.
 
